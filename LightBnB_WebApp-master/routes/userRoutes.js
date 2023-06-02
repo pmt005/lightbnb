@@ -10,7 +10,8 @@ router.post("/", (req, res) => {
   user.password = bcrypt.hashSync(user.password, 12);
   database
     .addUser(user)
-    .then((user) => {
+    .then((user) => { 
+      console.log("success", user);
       if (!user) {
         return res.send({ error: "error" });
       }
@@ -18,7 +19,11 @@ router.post("/", (req, res) => {
       req.session.userId = user.id;
       res.send("🤗");
     })
-    .catch((e) => res.send(e));
+    .catch((e) => {
+      console.log("error", e);
+      res.send(e);
+    });
+    
 });
 
 // Log a user in
